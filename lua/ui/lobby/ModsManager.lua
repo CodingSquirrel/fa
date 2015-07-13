@@ -214,6 +214,9 @@ function NEW_MODS_GUI(parent, IsHost, modstatus, availableMods)
         index = 0
         exclusiveMod = false
         local current_list = {}
+        -- NOPE
+
+        -- NOPE NOPE NOPE
         scrollGroup.controlList = {}
         local allmods = Mods.AllSelectableMods()
         local selmods = Mods.GetSelectedMods()
