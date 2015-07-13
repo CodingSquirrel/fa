@@ -217,25 +217,19 @@ function SetSelectedMods(s)
     end
 end
 
+function GetLocallyAvailableMods()
+    local result = {}
+    for k,mod in AllMods() do
+        if not mod.ui_only then
+            result[mod.uid] = true
+        end
+    end
+    return result
+end
 
 function GetSelectedMods()
     return GetPreference('active_mods') or {}
 end
-
-function GetUnSelectedMods()
-    local selectMod = GetSelectedMods()
-	local allMod = AllMods()
-	local tableUnselectMod = {}
-	for k, v in allMod do
-		if not selectMod[v.uid] then
-			--LOG('>>> '..v.name..' - '..v.uid)
-			tableUnselectMod[v.uid] = true
-			--table.insert(tableUnselectMod, v.uid)
-		end
-	end
-	return tableUnselectMod, true
-end
-
 
 local function LoadModInfo(filename)
     -- Fill in some defaults to start with...
@@ -371,6 +365,11 @@ function GetDependencies(uid)
                     ret.conflicts[conflict] = true
                 end
             end
+        end
+
+        -- Exclusive mods conflict with everything.
+        if allMods[uid].exclusive then
+            ret.conflicts = table.map(function() return true end, allMods)
         end
 
         -- check if any other mods list this mod as a conflict
