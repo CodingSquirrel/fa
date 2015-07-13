@@ -275,7 +275,7 @@ function NEW_MODS_GUI(parent, IsHost, modstatus, availableMods)
         end)
 
         for k, v in current_list do
-            table.insert(scrollGroup.controlList, CreateListElementtt(scrollGroup, v, k))
+            table.insert(scrollGroup.controlList, CreateListElement(scrollGroup, v, k))
             if IsHost and selmods[v.uid] then
                 scrollGroup.controlList[k].activated = true
                 scrollGroup.controlList[k].bg:SetTexture(UIUtil.SkinnableFile('/MODS/enabled.dds'))
@@ -381,7 +381,7 @@ function NEW_MODS_GUI(parent, IsHost, modstatus, availableMods)
                         end
                     end
                     if not exist then -- IF The mod is not listed in the GUI, create the mod in the list
-                        table.insert(scrollGroup.controlList, the_mod.pos+1, CreateListElementtt(scrollGroup, allMods[c], the_mod.pos))
+                        table.insert(scrollGroup.controlList, the_mod.pos+1, CreateListElement(scrollGroup, allMods[c], the_mod.pos))
                         control = scrollGroup.controlList[the_mod.pos+1]
                         control.activated = true
                         control.bg:SetTexture(UIUtil.SkinnableFile('/MODS/enabled.dds'))
@@ -521,7 +521,7 @@ function NEW_MODS_GUI(parent, IsHost, modstatus, availableMods)
     GUI_OPEN = true
 end
 
-function CreateListElementtt(parent, modInfo, Pos)
+function CreateListElement(parent, modInfo, Pos)
     local group = Group(parent)
         numElementsPerPage = 6
         group.Height:Set(function() return parent.Height() / numElementsPerPage  end)
