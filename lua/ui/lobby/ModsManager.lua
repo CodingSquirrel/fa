@@ -315,7 +315,7 @@ function NEW_MODS_GUI(parent, IsHost, modstatus, availableMods)
             end
         end
         
-        local function ActiveExclusifMod(the_exclusif_mod)
+        local function OnExclusiveModSelected(the_exclusif_mod)
             local function FUNC_RUN()
                 exclusiveMod = true
                 for index, control in scrollGroup.controlList do
@@ -480,7 +480,7 @@ function NEW_MODS_GUI(parent, IsHost, modstatus, availableMods)
                                     UNActiveMod(self)
                                 else
                                     if self.modInfo.exclusive then
-                                        ActiveExclusifMod(self)
+                                        OnExclusiveModSelected(self)
                                     else
                                         if exclusiveMod then 
                                             ActiveModAndRemoveExclusifMod(self)
